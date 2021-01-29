@@ -192,12 +192,7 @@
             }
         }('{{ message }}')
     </script>  {% endfor %} {% endif %}-->
-    {% if messages %} {% for message in messages %}
-    <script type=text/javascript>
-        toastr.options.progressBar = true;
-        toastr. {{message.tags}}('{{ message }}')
-    </script>
-    {% endfor %} {% endif %}
+    
 
 
 

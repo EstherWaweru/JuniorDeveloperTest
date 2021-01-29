@@ -80,20 +80,21 @@ def edit_company_save(request):
         return HttpResponse("<h2>Method Not Allowed</h2>")
     else:
         company_id=request.POST.get("company_id")
-        print("*******",institution_id)
+        print("*******",company_id)
         name=request.POST.get("company_name")
         email=request.POST.get("email")
         logo=request.POST.get("logo")
         website=request.POST.get("website")
-        try:
-            company=Company.objects.get(id=company_id)
-            company.name=name
-            company.logo=logo
-            company.website=website
-            company.email=email
-            company.save()
-            messages.success(request,"Successfully Edited Company ")
-            return HttpResponseRedirect(reverse("manage_company"))
-        except:
-            messages.error(request,"Failed to Edit Company Details")
-            return HttpResponseRedirect("/edit_company/"+company_id)
+        print("we",website)
+        # try:
+        company=Company.objects.get(id=company_id)
+        company.name=name
+        company.logo=logo
+        company.website=website
+        company.email=email
+        company.save()
+        messages.success(request,"Successfully Edited Company ")
+        return HttpResponseRedirect(reverse("manage_companies"))
+        # except:
+        messages.error(request,"Failed to Edit Company Details")
+        return HttpResponseRedirect("/edit_company/"+company_id)
