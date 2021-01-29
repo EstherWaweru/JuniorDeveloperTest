@@ -70,3 +70,30 @@ def add_company_save(request):
         except:
             messages.error(request,"Failed to Add A Company")
             return HttpResponseRedirect(reverse("add_company"))
+@login_required
+def edit_company(request,company_id):
+    company=Company.objects.get(id=company_id)
+    return render(request,"edit_company.html",{"company":company,"id":company_id})
+@login_required
+def edit_company_save(request):
+    if request.method!="POST":
+        return HttpResponse("<h2>Method Not Allowed</h2>")
+    else:
+        company_id=request.POST.get("company_id")
+        print("*******",institution_id)
+        name=request.POST.get("company_name")
+        email=request.POST.get("email")
+        logo=request.POST.get("logo")
+        website=request.POST.get("website")
+        try:
+            company=Company.objects.get(id=company_id)
+            company.name=name
+            company.logo=logo
+            company.website=website
+            company.email=email
+            company.save()
+            messages.success(request,"Successfully Edited Company ")
+            return HttpResponseRedirect(reverse("manage_company"))
+        except:
+            messages.error(request,"Failed to Edit Company Details")
+            return HttpResponseRedirect("/edit_company/"+company_id)
