@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR=os.path.join(BASE_DIR,"static")
 MEDIA_DIR=os.path.join(BASE_DIR,"media")
-TEMPLATES_DIR=os.path.join(BASE_DIR,"templates")
+TEMPLATES_DIR=os.path.join(BASE_DIR,"api/templates")
 
 
 # Quick-start development settings - unsuitable for production
