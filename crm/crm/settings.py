@@ -135,5 +135,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     STATIC_DIR,
 ]
-MEDIA_URK='/media/'
+#MEDIA
+MEDIA_ROOT=MEDIA_DIR
+MEDIA_URL='/media/'
 AUTH_USER_MODEL = 'api.CustomUser'
+AUTHENTICATION_BACKENDS=['api.EmailBackEnd.EmailBackEnd']
