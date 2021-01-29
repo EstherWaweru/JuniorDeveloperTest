@@ -35,6 +35,8 @@ urlpatterns = [
          name="add_company_save"),
     path('edit_company/<str:company_id>',
          views.edit_company, name="edit_company"),
+    path('delete_company/<str:company_id>',
+         views.delete_company, name="delete_company"),
     path('edit_company_save', views.edit_company_save,
          name="edit_company_save"),
     # path('company/list', views.company_list, name='company-list'),
