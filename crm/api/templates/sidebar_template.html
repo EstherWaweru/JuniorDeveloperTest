@@ -33,6 +33,28 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    {% url 'dashboard' as dashboard %}
+                    <a href="{% url 'dashboard' %}" class="nav-link {% if request.path == dashboard %} active {% endif %}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Employees
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% url 'manage_companies' as manage_companies %} {% url 'edit_company' company_id=id as edit_company %}
+                    <a href="{% url 'manage_companies' %}" class="nav-link {% if request.path == manage_companies %} active {% endif %} {% if request.path == edit_company %} active {% endif %}">
+
+
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            View Companies
+
+                        </p>
+                    </a>
+                </li>
                
 
 

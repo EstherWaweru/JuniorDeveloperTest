@@ -1,0 +1,76 @@
+{% extends "base.html"%} {%load static%}{% block page_title %} Manage companies {% endblock page_title %} {%block main_content%}
+
+<section class="content">
+    <div class="container-fluid">
+
+
+
+        <div class=row>
+            <a href="{% url 'add_company' %}" class="btn  "><span class=""><i class="feather icon-plus"></i> Add New  Company</span></a>
+            
+            </div>
+            <p></p>
+            <p></p>
+        <!-- /.card-header -->
+        <div class="card">
+        <div class="card-body table-responsive ">
+            <table id="company-table" class="table table-bordered table-hover" data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Company Name</th>
+
+                        <th>Email</th>
+                        <th>Logo</th>
+                        <th>Website</th>
+
+                        <!-- <th>Date Created</th> -->
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for company in companies %}
+                    <tr>
+
+                        <td>{{ forloop.counter}}</td>
+                        <td>{{ company.name }}</td>
+
+                        <td>{{ company.email }}</td>
+                        <td>{{ company.logo }}</td>
+                        <td>{{company.website}}</td>
+
+                        <!-- <td>{{ institution.created_at }}</td> -->
+
+                        <td>
+                            <a href="{% url 'edit_institution' institution.id %}" class="btn btn-tool">
+                                <i class="fas fa-edit"></i></td>
+                        <td>
+                            <a href="{% url 'institution-delete' institution.id %}" class="btn btn-tool">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <!-- /.card-body -->
+
+
+    </div>
+</section>
+{%endblock main_content%} {% block custom_js %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#company-table').DataTable({
+            "autoWidth": false,
+        });
+    });
+</script>
+
+{%endblock custom_js%}
