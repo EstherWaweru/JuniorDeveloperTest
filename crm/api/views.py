@@ -48,7 +48,7 @@ def add_company(request):
 @login_required
 def add_company_save(request):
     """
-    This method is for adding a new organization.
+    This method is for adding a new company
 
     Extended description of function.
     arg(request)
@@ -57,17 +57,16 @@ def add_company_save(request):
     if request.method!="POST":
         return HttpResponse("Method Not Allowed")
     else:
-        merchant_name=request.POST.get("merchant_name")
-        merchant_id=request.POST.get("merchant_id")
-        phoneNumber=request.POST.get("phoneNumber")
+        company_name=request.POST.get("company_name")
+        
         email=request.POST.get("email")
-        commission=request.POST.get("commission")
-        commission_type=request.POST.get("commission_type")
+        website=request.POST.get("website")
+        logo=request.POST.get("logo")
         try:
-            merchant_model=Merchant(name=merchant_name,merchant_id=merchant_id,phone_number=phoneNumber,email=email,commission_type=commission_type,commission=commission)
+            merchant_model=Company(name=company_name,email=email,website=website,logo=logo)
             merchant_model.save()
-            messages.success(request,"Successfully Added A Merchant")
-            return HttpResponseRedirect(reverse("add_institution"))
+            messages.success(request,"Successfully Added A Company")
+            return HttpResponseRedirect(reverse("add_company"))
         except:
-            messages.error(request,"Failed to Add A Merchant")
-            return HttpResponseRedirect(reverse("add_institution"))
+            messages.error(request,"Failed to Add A Company")
+            return HttpResponseRedirect(reverse("add_company"))

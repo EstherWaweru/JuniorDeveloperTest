@@ -61,14 +61,14 @@
 {% if messages %} {% for message in messages %}
 <script type=text/javascript>
     $(document).ready(function() {
-        // alert("Hello");
+        
         toastr.options = {
 
 "progressBar": true,
 "showDuration": "100",
 
 };
-// toastr.error('Invali');
+
 toastr.{{message.tags}}('{{message}}');
 
        
