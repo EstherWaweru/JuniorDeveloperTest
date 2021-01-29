@@ -86,15 +86,29 @@ def edit_company_save(request):
         logo=request.POST.get("logo")
         website=request.POST.get("website")
         print("we",website)
-        # try:
+        try:
+            company=Company.objects.get(id=company_id)
+            company.name=name
+            company.logo=logo
+            company.website=website
+            company.email=email
+            company.save()
+            messages.success(request,"Successfully Edited Company ")
+            return HttpResponseRedirect(reverse("manage_companies"))
+        except:
+            messages.error(request,"Failed to Edit Company Details")
+            return HttpResponseRedirect("/edit_company/"+company_id)
+@login_required
+def delete_company(request,company_id):
+    if request.method!="POST":
         company=Company.objects.get(id=company_id)
-        company.name=name
-        company.logo=logo
-        company.website=website
-        company.email=email
-        company.save()
-        messages.success(request,"Successfully Edited Company ")
-        return HttpResponseRedirect(reverse("manage_companies"))
-        # except:
-        messages.error(request,"Failed to Edit Company Details")
-        return HttpResponseRedirect("/edit_company/"+company_id)
+        return render(request,"delete_company.html",{"company":company,"id":company_id})
+    else:
+        try:
+            company=Company.objects.get(id=company_id)
+            company.delete()
+            messages.success(request,"Successfully Deleted Company ")
+            return HttpResponseRedirect(reverse("manage_companies"))
+        except:
+            messages.success(request,"Successfully Deleted Company ")
+            return HttpResponseRedirect(reverse("manage_companies"))
