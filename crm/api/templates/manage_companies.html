@@ -41,10 +41,10 @@
                         <td>{{ company.logo }}</td>
                         <td>{{company.website}}</td>
 
-                        <!-- <td>{{ institution.created_at }}</td> -->
+                        
 
                         <td>
-                            <a href="" class="btn btn-tool">
+                            <a href="{% url 'edit_company' company.id %}" class="btn btn-tool">
                                 <i class="fas fa-edit"></i></td>
                         <td>
                             <a href="" class="btn btn-tool">

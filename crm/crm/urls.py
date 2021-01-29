@@ -33,9 +33,9 @@ urlpatterns = [
     path('add_company', views.add_company, name="add_company"),
     path('add_company_save', views.add_company_save,
          name="add_company_save"),
-    # path('edit_company/<str:company_id>',
-    #      views.company, name="edit_company"),
-    # path('edit_company_save', views.edit_company_save,
-    #      name="edit_company_save"),
+    path('edit_company/<str:company_id>',
+         views.edit_company, name="edit_company"),
+    path('edit_company_save', views.edit_company_save,
+         name="edit_company_save"),
     # path('company/list', views.company_list, name='company-list'),
 ]
