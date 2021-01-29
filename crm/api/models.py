@@ -19,5 +19,7 @@ class Company(models):
     email=models.EmailField(max_length=50,blank=False,unique=True)
     logo=models.FileField(blank=True,null=True)
     website=models.URLField(max_length=250,db_index=True, unique=True, blank=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
 
 
