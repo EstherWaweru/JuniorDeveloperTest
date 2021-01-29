@@ -112,3 +112,10 @@ def delete_company(request,company_id):
         except:
             messages.success(request,"Successfully Deleted Company ")
             return HttpResponseRedirect(reverse("manage_companies"))
+
+#employees controllers
+@login_required
+def manage_employees(request):
+    employees=CustomUser.objects.all()
+    context={"employees":employees}
+    return render(request,"manage_employees.html",context)

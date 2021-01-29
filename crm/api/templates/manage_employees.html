@@ -1,0 +1,82 @@
+{% extends "base.html"%} {%load static%}{% block page_title %} Manage companies {% endblock page_title %} {%block main_content%}
+
+<section class="content">
+    <div class="container-fluid">
+
+
+
+        <div class=row>
+            <a href="" class="btn  "><span class=""><i class="feather icon-plus"></i> Add New  Employee</span></a>
+            
+            </div>
+            <p></p>
+            <p></p>
+        <!-- /.card-header -->
+        <div class="card">
+        <div class="card-body table-responsive ">
+            <table id="employees-table" class="table table-bordered table-hover" data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Employee Name</th>
+
+                        <th>Email</th>
+                        <th>Company</th>
+                        <th>Phone</th>
+
+                        <!-- <th>Date Created</th> -->
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for employee in employees %}
+                    <tr>
+
+                        <td>{{ forloop.counter}}</td>
+                        <td>{{ employee.first_name }}{{employee.last_name}}</td>
+
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.company }}</td>
+                        <td>{{employee.phone}}</td>
+
+                        
+
+                        <td>
+                            <a href="" class="btn btn-tool">
+                                <i class="fas fa-edit"></i></td>
+                        <td>
+                            <a href="" class="btn btn-tool">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-tool">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <!-- /.card-body -->
+
+
+    </div>
+</section>
+{%endblock main_content%} {% block custom_js %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#employees-table').DataTable({
+            "autoWidth": false,
+        });
+    });
+</script>
+
+{%endblock custom_js%}
