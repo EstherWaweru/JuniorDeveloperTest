@@ -14,7 +14,7 @@
                 <img src="{%static 'dist/img/profile_image.png' %}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{% url 'merchant_admin_profile' %}" class="d-block">{{user.username}}</a>
+                <a href="{% url 'user_profile' %}" class="d-block">{{user.username}}</a>
             </div>
         </div>
 
@@ -24,8 +24,8 @@
                 <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    {% url 'finance_home' as finance_home %}
-                    <a href="{% url 'finance_home' %}" class="nav-link {% if request.path == finance_home %} active {% endif %}">
+                    {% url 'dashboard' as dashboard %}
+                    <a href="{% url 'dashboard' %}" class="nav-link {% if request.path == dashboard %} active {% endif %}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Dashboard
@@ -33,16 +33,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    {% url 'finance_fund' as finance_fund %}
-                    <a href="{% url 'finance_fund' %}" class="nav-link {% if request.path == finance_fund %} active {% endif %}">
-                        <i class="nav-icon fas fa-home"></i>
-                        <p>
-                            Fund Org
-
-                        </p>
-                    </a>
-                </li>
+               
 
 
 

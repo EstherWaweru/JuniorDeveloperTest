@@ -29,3 +29,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect("/")
+def user_profile(request):
+    user=CustomUser.objects.get(id=request.user.id)
+    return render(request,"user_profile.html",{"user":user})

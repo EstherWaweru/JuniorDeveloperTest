@@ -16,13 +16,16 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from api import views
+from django.urls import path
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', views.loginPage, name='loginPage'),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^user_login', views.user_login, name="user_login"),
-    url(r'^logout_user', views.user_logout, name="user_logout"),
-    url(r'^dashboard', views.home, name="dashboard"),
+    path('admin/', admin.site.urls),
+    # url(r'', views.loginPage, name='loginPage'),
+    path('',views.loginPage,name='loginPage'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('user_login', views.user_login, name="user_login"),
+    path('logout_user', views.user_logout, name="user_logout"),
+    path('dashboard', views.home, name="dashboard"),
+    path('user_profile', views.user_profile, name="user_profile"),
 ]
