@@ -1,6 +1,11 @@
 from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse, HttpResponseRedirect
+from api.EmailBackEnd import EmailBackEnd
+from django.urls import reverse
 
-# Create your views here.
+# Create your views/controllers here.
 def loginPage(request):
     return render(request,'login.html')
 def home(request):

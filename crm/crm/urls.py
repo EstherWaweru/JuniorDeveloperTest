@@ -22,4 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', views.loginPage, name='loginPage'),
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^user_login', views.user_login, name="user_login"),
+    url(r'^logout_user', views.user_logout, name="user_logout"),
+    url(r'^dashboard', views.home, name="dashboard"),
 ]
