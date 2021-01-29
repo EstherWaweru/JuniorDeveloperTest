@@ -1,8 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
+#table for Companies
+class Company(models.Model):
+    name=models.CharField(max_length=50,blank=False,unique=True)
+    email=models.EmailField(max_length=50,blank=False,unique=True)
+    logo=models.FileField(blank=True,null=True)
+    website=models.URLField(max_length=250,db_index=True, unique=True, blank=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
 #table for Custom User
 class CustomUser(AbstractUser):
    
@@ -13,13 +22,6 @@ class CustomUser(AbstractUser):
     updated_at=models.DateTimeField(auto_now=True)
 
 
-#table for Companies
-class Company(models):
-    name=models.CharField(max_length=50,blank=False,unique=True)
-    email=models.EmailField(max_length=50,blank=False,unique=True)
-    logo=models.FileField(blank=True,null=True)
-    website=models.URLField(max_length=250,db_index=True, unique=True, blank=True)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+
 
 
