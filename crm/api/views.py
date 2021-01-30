@@ -119,3 +119,39 @@ def manage_employees(request):
     employees=CustomUser.objects.all()
     context={"employees":employees}
     return render(request,"manage_employees.html",context)
+
+@login_required
+def add_employee(request):
+    """
+    This method is for adding a new employee
+
+    Extended description of function.
+    arg(request)
+
+    """
+    if request.method!="POST":
+        companies=Company.objects.all()
+    
+        context={"companies":companies}
+        return render(request,"add_employee.html",context)
+    else:
+        first_name=request.POST.get("first_name")
+        last_name=request.POST.get("last_name")
+        email=request.POST.get("email")
+        company=request.POST.get("company")
+        phone_number=request.POST.get("phone_number")
+        
+        username=request.POST.get("username")
+        password=request.POST.get("password")
+        try:
+            user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name)
+            company_obj=Company.objects.get(id=company_id)
+            user.company=company_obj
+            user.phone_number=phone_number
+            user.save()
+            
+            messages.success(request,"Successfully Added  Employee")
+            return HttpResponseRedirect(reverse("add_employee"))
+        except:
+            messages.error(request,"Failed to Add Employee")
+            return HttpResponseRedirect(reverse("add_employee"))
