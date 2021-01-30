@@ -43,4 +43,6 @@ urlpatterns = [
     #employees urls
     path('manage_employees', views.manage_employees,
          name='manage_employees'),
+    path('add_employee', views.add_employee, name="add_employee"),
+    
 ]

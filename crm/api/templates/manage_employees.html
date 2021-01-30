@@ -1,4 +1,4 @@
-{% extends "base.html"%} {%load static%}{% block page_title %} Manage companies {% endblock page_title %} {%block main_content%}
+{% extends "base.html"%} {%load static%}{% block page_title %} Manage Employees {% endblock page_title %} {%block main_content%}
 
 <section class="content">
     <div class="container-fluid">
@@ -6,7 +6,7 @@
 
 
         <div class=row>
-            <a href="" class="btn  "><span class=""><i class="feather icon-plus"></i> Add New  Employee</span></a>
+            <a href="{% url 'add_employee' %}" class="btn  "><span class=""><i class="feather icon-plus"></i> Add New  Employee</span></a>
             
             </div>
             <p></p>
