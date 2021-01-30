@@ -1,0 +1,31 @@
+{% extends "base.html"%} {% block page_title %} Home {% endblock page_title %} {%block main_content%}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row" style="margin:5% auto;display: flex;margin-left:25%">
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="card card-danger">
+                    <div class="card-header">
+                        <h3 class="card-title">Delete Record</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        <div class="alert">
+                            <p>Are you sure you want to delete {{ company.name }} Company?</p>
+                            <p>All contents attached to this record will be deleted</p>
+                        </div>
+
+
+                        <div class="card-footer">
+                            <button type="submit"  class="btn-danger  btn-block">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.container-fluid -->
+</section>
+
+
+{% endblock main_content %}

@@ -13,9 +13,37 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
+from api import views
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    # url(r'', views.loginPage, name='loginPage'),
+    path('',views.loginPage,name='loginPage'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('user_login', views.user_login, name="user_login"),
+    path('logout_user', views.user_logout, name="user_logout"),
+    path('dashboard', views.home, name="dashboard"),
+    path('user_profile', views.user_profile, name="user_profile"),
+    path('manage_companies', views.manage_companies,
+         name='manage_companies'),
+    path('add_company', views.add_company, name="add_company"),
+    path('add_company_save', views.add_company_save,name="add_company_save"),
+    path('edit_company/<str:company_id>',views.edit_company, name="edit_company"),
+    path('delete_company/<str:company_id>',views.delete_company, name="delete_company"),
+    path('edit_company_save', views.edit_company_save,name="edit_company_save"),
+    
+    path('manage_employees', views.manage_employees,name='manage_employees'),
+    path('add_employee', views.add_employee, name="add_employee"),
+    path('edit_employee/<str:employee_id>',views.edit_employee, name="edit_employee"),
+    path('company/<str:company_id>',views.company_detail, name="company_detail"),
+    path('delete_employee/<str:employee_id>',views.delete_employee, name="delete_employee"),
+    
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
+    static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
