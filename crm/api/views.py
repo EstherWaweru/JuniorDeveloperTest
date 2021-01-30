@@ -37,8 +37,28 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect("/")
 def user_profile(request):
-    user=CustomUser.objects.get(id=request.user.id)
-    return render(request,"user_profile.html",{"user":user})
+    if request.method!="POST":
+        user=CustomUser.objects.get(id=request.user.id)
+        return render(request,"user_profile.html",{"user":user})
+    else:
+        first_name=request.POST.get("first_name")
+        last_name=request.POST.get("last_name")
+        password=request.POST.get("password")
+        try:
+            customuser=CustomUser.objects.get(id=request.user.id)
+            customuser.first_name=first_name
+            customuser.last_name=last_name
+            if password!=None and password!="":
+                customuser.set_password(password)
+            customuser.save()
+            messages.success(request, "Successfully Updated Profile")
+            return HttpResponseRedirect(reverse("loginPage"))
+        except:
+            messages.error(request, "Failed to Update Profile")
+            return HttpResponseRedirect(reverse("loginPage"))
+
+
+
 #create a company
 @login_required
 def manage_companies(request):
@@ -62,16 +82,16 @@ def add_company_save(request):
         return HttpResponse("Method Not Allowed")
     else:
         company_name=request.POST.get("company_name")
-        
+        logo=request.FILES.get("logo")
         email=request.POST.get("email")
         website=request.POST.get("website")
-        logo=request.POST.get("logo")
         try:
-            merchant_model=Company(name=company_name,email=email,website=website,logo=logo)
-            merchant_model.save()
+            company_model=Company(name=company_name,email=email,website=website,logo=logo)
+            company_model.save()
             messages.success(request,"Successfully Added A Company")
-            return HttpResponseRedirect(reverse("manage_companies"))
+            return HttpResponseRedirect(reverse("add_company"))
         except:
+            
             messages.error(request,"Failed to Add A Company")
             return HttpResponseRedirect(reverse("add_company"))
 @login_required
@@ -84,12 +104,10 @@ def edit_company_save(request):
         return HttpResponse("<h2>Method Not Allowed</h2>")
     else:
         company_id=request.POST.get("company_id")
-        print("*******",company_id)
         name=request.POST.get("company_name")
         email=request.POST.get("email")
         logo=request.POST.get("logo")
         website=request.POST.get("website")
-        print("we",website)
         try:
             company=Company.objects.get(id=company_id)
             company.name=name
@@ -152,25 +170,27 @@ def add_employee(request):
         
         username=request.POST.get("username")
         password=request.POST.get("password")
-        # try:
-        user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name)
-        company_obj=Company.objects.get(id=company)
-        user.company=company_obj
-        user.phone_number=phone_number
-        user.save()
-        
-        messages.success(request,"Successfully Added  Employee")
-        return HttpResponseRedirect(reverse("manage_employees"))
-        # except:
-        messages.error(request,"Failed to Add Employee")
-        return HttpResponseRedirect(reverse("add_employee"))
+        try:
+            user=CustomUser.objects.create_user(username=username,password=password,last_name=last_name,first_name=first_name)
+            company_obj=Company.objects.get(id=company)
+            user.company=company_obj
+            user.email=email
+            user.phone_number=phone_number
+            user.save()
+            
+            messages.success(request,"Successfully Added  Employee")
+            return HttpResponseRedirect(reverse("manage_employees"))
+        except:
+            user.delete()
+            messages.error(request,"Failed to Add Employee")
+            return HttpResponseRedirect(reverse("add_employee"))
 @login_required
 def edit_employee(request,employee_id):
     if request.method!="POST":
         employee=CustomUser.objects.get(id=employee_id)
         return render(request,"edit_employee.html",{"employee":employee,"id":employee_id})
     else:
-        # merchant_id=request.POST.get("merchant_id")
+       
         first_name=request.POST.get("first_name")
         last_name=request.POST.get("last_name")
         email=request.POST.get("email")

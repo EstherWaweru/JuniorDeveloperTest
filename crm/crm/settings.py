@@ -140,3 +140,11 @@ MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL='/media/'
 AUTH_USER_MODEL = 'api.CustomUser'
 AUTHENTICATION_BACKENDS=['api.EmailBackEnd.EmailBackEnd']
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'arrotechdesign@gmail.com'
+EMAIL_HOST_PASSWORD = '11371265!birkhoff?'
+DEFAULT_FROM_EMAIL="CRM<arrotechdesign@gmail.com>"

@@ -17,6 +17,8 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from api import views
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -43,3 +45,5 @@ urlpatterns = [
     path('delete_employee/<str:employee_id>',views.delete_employee, name="delete_employee"),
     
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
+    static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
