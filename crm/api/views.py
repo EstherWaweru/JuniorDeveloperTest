@@ -12,7 +12,11 @@ from api.models import Company,CustomUser
 def loginPage(request):
     return render(request,'login.html')
 def home(request):
-    return render(request,'dashboard.html')
+    company_count=Company.objects.all().count()
+    employee_count=CustomUser.objects.all().count()
+    last_ten_employees = CustomUser.objects.all().order_by('-id')[:10][::-1]
+    context={'companies':company_count,'employees':employee_count,'last_ten_employees':last_ten_employees}
+    return render(request,'dashboard.html',context)
 #log in a user using an email and a password
 def user_login(request):
     if request.method!="POST":
