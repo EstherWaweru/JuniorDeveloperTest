@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{%static 'dist/img/vp_logo.jpg' %}" alt="CRM LOGO" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{%static 'dist/img/downloadcrm.png' %}" alt="CRM LOGO" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">CRM</span>
     </a>
 
@@ -25,7 +25,7 @@
              with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     {% url 'dashboard' as dashboard %}
-                    <a href="{% url 'dashboard' %}" class="nav-link {% if request.path == dashboard %} active {% endif %}">
+                    <a href="{% url 'dashboard' %}"  class="nav-link {% if request.path == dashboard %} active {% endif %}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Dashboard
@@ -35,7 +35,7 @@
                 </li>
                 <li class="nav-item">
                     {% url 'manage_employees' as manage_employees %} {% url 'edit_employees' company_id=id as edit_employees %}
-                    <a href="{% url 'manage_employees' %}" class="nav-link {% if request.path == manage_employees %} active {% endif %} {% if request.path == edit_employees %} active {% endif %}">
+                    <a href="{% url 'manage_employees' %}"  class="nav-link {% if request.path == manage_employees %} active {% endif %} {% if request.path == edit_employees %} active {% endif %}">
 
 
                         <i class="nav-icon fas fa-users"></i>

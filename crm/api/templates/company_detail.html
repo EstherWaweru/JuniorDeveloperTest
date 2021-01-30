@@ -1,0 +1,72 @@
+{% extends "base.html"%} {% load static %} {% block page_title %} {{company.name}} Employees{% endblock page_title %} {% block main_content %}
+<section class="content">
+    <div class="container-fluid">
+        
+            <div class="card">
+                <div class="card-body table-responsive ">
+                    <table id="employees-table" class="table table-bordered table-hover" data-page-length='10'>
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Employee Name</th>
+        
+                                <th>Email</th>
+                                <th>Company</th>
+                                <th>Phone</th>
+        
+                                <!-- <th>Date Created</th> -->
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+        
+                            {% for employee in company.customuser_set.all  %}
+                            <tr>
+        
+                                <td>{{ forloop.counter}}</td>
+                                <td>{{ employee.first_name }} {{employee.last_name}}</td>
+        
+                                <td>{{ employee.email }}</td>
+                                <td>{{ employee.company.name }}</td>
+                                <td>{{employee.phone_number}}</td>
+        
+                                
+        
+                                <td>
+                                    <a href="{% url 'edit_employee' employee.id %}" class="btn btn-tool">
+                                        <i style="color:black"class="fas fa-edit"></i></td>
+                                <td>
+                                    <a href="{% url 'delete_employee' employee.id %}" class="btn btn-tool">
+                                        <i style="color:black"class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                                
+                            </tr>
+                            {% endfor %}
+        
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                <!-- /.card-body -->
+        
+        
+    </div>
+   
+</section>
+
+
+
+{%endblock main_content%} {% block custom_js %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#employees-table').DataTable({
+            "autoWidth": false,
+        });
+    });
+</script>
+
+{%endblock custom_js%}

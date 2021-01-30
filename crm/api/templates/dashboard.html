@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-6 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
+                <div class="small-box bg-light">
                     <div class="inner">
                         <h3>{{ companies }}</h3>
 
@@ -19,7 +19,7 @@
             <!-- ./col -->
             <div class="col-lg-6 col-6">
                 <!-- small box -->
-                <div class="small-box bg-success">
+                <div class="small-box bg-light">
                     <div class="inner">
                         <h3>{{ employees }}</h3>
 
@@ -52,7 +52,7 @@
                         <td>{{employee.last_login}}</td>
                         <td>{{ employee.last_name}} {{employee.first_name }} </td>
                         <td>{{ employee.company.name}}</td>
-                        <td>{{employee.mobile_number}}</td>
+                        <td>{{employee.phone_number}}</td>
                         <td>{{employee.email}}</td>
                         {% if employee.is_superuser %}
                         <td><span class="right badge badge-danger">Admin</span></td>
