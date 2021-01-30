@@ -28,7 +28,7 @@ SECRET_KEY = '83a26q&77bf%bib^q6t5!=5x=3yj33d6t(at6gtg$w-rm$i-a_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['djangocrmtest.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,6 +136,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     STATIC_DIR,
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #MEDIA
 MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL='/media/'
