@@ -70,7 +70,7 @@ def add_company_save(request):
             merchant_model=Company(name=company_name,email=email,website=website,logo=logo)
             merchant_model.save()
             messages.success(request,"Successfully Added A Company")
-            return HttpResponseRedirect(reverse("add_company"))
+            return HttpResponseRedirect(reverse("manage_companies"))
         except:
             messages.error(request,"Failed to Add A Company")
             return HttpResponseRedirect(reverse("add_company"))
@@ -123,6 +123,11 @@ def manage_employees(request):
     employees=CustomUser.objects.all()
     context={"employees":employees}
     return render(request,"manage_employees.html",context)
+@login_required
+def company_detail(request,company_id):
+    company=Company.objects.get(id=company_id)
+    context={"company":company}
+    return render(request,"company_detail.html",context)
 
 @login_required
 def add_employee(request):
@@ -155,7 +160,7 @@ def add_employee(request):
         user.save()
         
         messages.success(request,"Successfully Added  Employee")
-        return HttpResponseRedirect(reverse("add_employee"))
+        return HttpResponseRedirect(reverse("manage_employees"))
         # except:
         messages.error(request,"Failed to Add Employee")
         return HttpResponseRedirect(reverse("add_employee"))
@@ -180,7 +185,7 @@ def edit_employee(request,employee_id):
             user.phone_number=phoneNumber
             user.save()
             messages.success(request,"Successfully Edited Employee")
-            return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))
+            return HttpResponseRedirect(reverse("manage_employees"))
         except:
             messages.error(request,"Failed to Edit Employee")
             return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))

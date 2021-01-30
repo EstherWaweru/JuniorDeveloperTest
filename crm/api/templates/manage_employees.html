@@ -27,7 +27,7 @@
                         <!-- <th>Date Created</th> -->
                         <th>Edit</th>
                         <th>Delete</th>
-                        <th>View</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -46,17 +46,13 @@
 
                         <td>
                             <a href="{% url 'edit_employee' employee.id %}" class="btn btn-tool">
-                                <i class="fas fa-edit"></i></td>
+                                <i style="color:black"class="fas fa-edit"></i></td>
                         <td>
                             <a href="{% url 'delete_employee' employee.id %}" class="btn btn-tool">
-                                <i class="fas fa-times"></i>
+                                <i style="color:black"class="fas fa-times"></i>
                             </a>
                         </td>
-                        <td>
-                            <a href="" class="btn btn-tool">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                        </td>
+                        
                     </tr>
                     {% endfor %}
 
