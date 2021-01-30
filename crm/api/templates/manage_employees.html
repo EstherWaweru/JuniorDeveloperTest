@@ -36,16 +36,16 @@
                     <tr>
 
                         <td>{{ forloop.counter}}</td>
-                        <td>{{ employee.first_name }}{{employee.last_name}}</td>
+                        <td>{{ employee.first_name }} {{employee.last_name}}</td>
 
                         <td>{{ employee.email }}</td>
-                        <td>{{ employee.company }}</td>
-                        <td>{{employee.phone}}</td>
+                        <td>{{ employee.company.name }}</td>
+                        <td>{{employee.phone_number}}</td>
 
                         
 
                         <td>
-                            <a href="" class="btn btn-tool">
+                            <a href="{% url 'edit_employee' employee.id %}" class="btn btn-tool">
                                 <i class="fas fa-edit"></i></td>
                         <td>
                             <a href="" class="btn btn-tool">
