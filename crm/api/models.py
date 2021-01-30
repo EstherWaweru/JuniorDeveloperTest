@@ -17,7 +17,7 @@ class CustomUser(AbstractUser):
    
     company=models.ForeignKey(Company,blank=True,null=True,on_delete=models.CASCADE)
     mobile_num_regex = RegexValidator(regex="^[0-9]{10,15}$", message="Entered mobile number isn't in a right format!")
-    phone_number=models.CharField(validators=[mobile_num_regex],max_length=13,unique=True)
+    phone_number=models.CharField(validators=[mobile_num_regex],max_length=12)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 

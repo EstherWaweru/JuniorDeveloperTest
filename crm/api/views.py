@@ -143,15 +143,15 @@ def add_employee(request):
         
         username=request.POST.get("username")
         password=request.POST.get("password")
-        try:
-            user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name)
-            company_obj=Company.objects.get(id=company_id)
-            user.company=company_obj
-            user.phone_number=phone_number
-            user.save()
-            
-            messages.success(request,"Successfully Added  Employee")
-            return HttpResponseRedirect(reverse("add_employee"))
-        except:
-            messages.error(request,"Failed to Add Employee")
-            return HttpResponseRedirect(reverse("add_employee"))
+        # try:
+        user=CustomUser.objects.create_user(username=username,password=password,email=email,last_name=last_name,first_name=first_name)
+        company_obj=Company.objects.get(id=company)
+        user.company=company_obj
+        user.phone_number=phone_number
+        user.save()
+        
+        messages.success(request,"Successfully Added  Employee")
+        return HttpResponseRedirect(reverse("add_employee"))
+        # except:
+        messages.error(request,"Failed to Add Employee")
+        return HttpResponseRedirect(reverse("add_employee"))
