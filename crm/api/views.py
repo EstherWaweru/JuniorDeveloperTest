@@ -180,3 +180,18 @@ def edit_employee(request,employee_id):
         except:
             messages.error(request,"Failed to Edit Employee")
             return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))
+@login_required
+def delete_employee(request,employee_id):
+    if request.method!="POST":
+        employee=CustomUser.objects.get(id=employee_id)
+        return render(request,"delete_employee.html",{"employee":employee,"id":employee_id})
+    else:
+        try:
+            employee=CustomUser.objects.get(id=employee_id)
+            employee.delete()
+            messages.success(request,"Successfully Deleted Employee ")
+            return HttpResponseRedirect(reverse("manage_employees"))
+        except:
+            messages.success(request,"Successfully Deleted Employee ")
+            return HttpResponseRedirect(reverse("manage_employees"))
+
