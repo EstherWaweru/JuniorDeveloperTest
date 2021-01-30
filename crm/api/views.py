@@ -155,3 +155,28 @@ def add_employee(request):
         # except:
         messages.error(request,"Failed to Add Employee")
         return HttpResponseRedirect(reverse("add_employee"))
+@login_required
+def edit_employee(request,employee_id):
+    if request.method!="POST":
+        employee=CustomUser.objects.get(id=employee_id)
+        return render(request,"edit_employee.html",{"employee":employee,"id":employee_id})
+    else:
+        # merchant_id=request.POST.get("merchant_id")
+        first_name=request.POST.get("first_name")
+        last_name=request.POST.get("last_name")
+        email=request.POST.get("email")
+        username=request.POST.get("username")
+        phoneNumber=request.POST.get("phoneNumber")
+        try:
+            user=CustomUser.objects.get(id=employee_id)
+            user.first_name=first_name
+            user.last_name=last_name
+            user.email=email
+            user.username=username
+            user.phone_number=phoneNumber
+            user.save()
+            messages.success(request,"Successfully Edited Employee")
+            return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))
+        except:
+            messages.error(request,"Failed to Edit Employee")
+            return HttpResponseRedirect(reverse("edit_employee",kwargs={"employee_id":employee_id}))
