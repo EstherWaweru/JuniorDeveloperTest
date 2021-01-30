@@ -40,4 +40,7 @@ urlpatterns = [
     path('edit_company_save', views.edit_company_save,
          name="edit_company_save"),
     # path('company/list', views.company_list, name='company-list'),
+    #employees urls
+    path('manage_employees', views.manage_employees,
+         name='manage_employees'),
 ]
