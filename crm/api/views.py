@@ -7,7 +7,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required,permission_required
 from api.models import Company,CustomUser
 
-
+def showdemo(request):
+    return render(request,'demo.html')
 # Create your views/controllers here.
 def loginPage(request):
     return render(request,'login.html')
