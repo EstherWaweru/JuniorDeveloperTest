@@ -39,6 +39,8 @@ Basically, that’s it. With this simple exercise junior developer shows the ski
 8. Confirm everything is okay with python manage.py runserver
 9. Run migrations with python manage.py makemigrations api then python manage.py makemigrations api then python manage.py migrate
 
+### Live Link
+The project is hosted on this link <https://tetcrm.herokuapp.com/> .The username credential is admin@gmail.com and password is Test123!4
 
 ## Contributing
-This repository is owned by [https://github.com/EstherWaweru] . To contribute to this project raise an issue .
+This repository is owned by <https://github.com/EstherWaweru> . To contribute to this project raise an issue .
