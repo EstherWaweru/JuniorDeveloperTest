@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.loginPage, name='loginPage'),
     # path('',views.demo,name='loginPage'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('delete_company_ajax',views.delete_company_ajax,name='delete_company_ajax'),
     path('user_login', views.user_login, name="user_login"),
     path('logout_user', views.user_logout, name="user_logout"),
     path('dashboard', views.home, name="dashboard"),

@@ -6,6 +6,7 @@ from api.EmailBackEnd import EmailBackEnd
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required,permission_required
 from api.models import Company,CustomUser
+from django.views.decorators.csrf import csrf_exempt
 
 def showdemo(request):
     return render(request,'demo.html')
@@ -224,4 +225,18 @@ def delete_employee(request,employee_id):
         except:
             messages.success(request,"Successfully Deleted Employee ")
             return HttpResponseRedirect(reverse("manage_employees"))
+@csrf_exempt
+def delete_company_ajax(request):
+    try:
+        id=request.POST.get("id")
+        
+        company=Company.objects.get(id=id)
+        company.delete()
+        messages.success(request,"Successfully Deleted Company ")
+        return HttpResponse("True")
+    except:
+        messages.error(request,"Failed to Delete Company ")
+        return HttpResponse("False")
+        
+
 

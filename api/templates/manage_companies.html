@@ -26,8 +26,8 @@
 
                         <!-- <th>Date Created</th> -->
                         <th>Edit</th>
-                        <th>Delete</th>
-                        <th>View
+                        <th>View</th>
+                        <th>Delete
                         </th>
                     </tr>
                 </thead>
@@ -36,7 +36,7 @@
                     {% for company in companies %}
                     <tr>
 
-                        <td>{{ forloop.counter}}</td>
+                        <td>{{ company.id}}</td>
                         <td>{{ company.name }}</td>
 
                         <td>{{ company.email }}</td>
@@ -48,16 +48,17 @@
                         <td>
                             <a href="{% url 'edit_company' company.id %}" class="btn btn-tool">
                                 <i style="color:black"class="fas fa-edit"></i></td>
-                        <td>
+                        <!-- <td>
                             <a href="{% url 'delete_company' company.id %}" class="btn btn-tool">
                                 <i style="color:black" class="fas fa-times"></i>
                             </a>
-                        </td>
+                        </td> -->
                         <td>
                             <a href="{% url 'company_detail' company.id %}" class="btn btn-tool">
                                 <i style="color:black"class="fas fa-eye"></i>
                             </a>
                         </td>
+                        <td><a href="#" class="btn btn-tool delete_company" data-toggle="modal" data-target="#myModal"><i style="color:black"class="fas fa-times"></i></a></td>
                         
                     </tr>
                     {% endfor %}
@@ -71,6 +72,34 @@
 
     </div>
 </section>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete <span id="name_span"></span></h4>
+            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        </div>
+        <div class="modal-body">
+          
+            <div class="alert">
+                <h6>Are you sure you want to delete <span id="name_span1"></span> Company?</h6>
+                <p>All contents attached to this record will be deleted!</p>
+            
+             <input type="hidden" name="company_id" class="form-control" id="company_id">
+          </div>
+          <div class="form-group">
+            <button class="btn btn-block delete_company_btn"  type="button">Delete</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 {%endblock main_content%} {% block custom_js %}
 
 <script type="text/javascript">
@@ -78,7 +107,62 @@
         $('#company-table').DataTable({
             "autoWidth": false,
         });
-    });
+        
+        
+        });
+        $(".delete_company").click(function(){
+            var company_id=$(this).parents("tr").children("td:eq(0)").text();
+            var company_name=$(this).parents("tr").children("td:eq(1)").text();
+            
+            $("#company_id").val(company_id);
+            $("#name_span").text(company_name);
+            $("#name_span1").text(company_name);
+      
+
+         });
+        $(".delete_company_btn").click(function(){
+             var id=$("#company_id").val();
+      
+             deleteCompany(id);
+             $("#myModal").modal('hide');
+
+          });
+
+       function deleteCompany(id){
+           $.ajax({
+            url:"{% url 'delete_company_ajax' %}",
+            type:'POST',
+            data:{id:id},
+        })
+        .done(function(response){
+            if(response=="False"){
+                location.reload(true);
+            }
+            else{
+                
+                location.reload(true);
+            }});
+        }
+        
 </script>
+{% if messages %} {% for message in messages %}
+<script type=text/javascript>
+    $(document).ready(function() {
+       
+        toastr.options = {
+
+"progressBar": true,
+"showDuration": "100",
+
+};
+
+toastr.{{message.tags}}('{{message}}');
+
+       
+        
+});
+    
+</script>
+{% endfor %} {% endif %}
 
 {%endblock custom_js%}
